@@ -1,0 +1,72 @@
+# ============================================================
+# Universal LangGraph Agentic System — Requirements
+# ============================================================
+# Install: pip install -r requirements.txt
+# Python version: 3.10+
+#
+# ADDED IN THIS VERSION:
+#   + Pillow — image preprocessing for GLM-OCR vision input
+#   + requests — sync HTTP calls to GLM-OCR local API
+#   + sqlalchemy — DB tool (db_query / db_execute) support
+#   + tabulate — pretty table output in model_battle.py report
+# ============================================================
+
+# ── Core LangGraph / LangChain ────────────────────────────
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+langchain-groq>=0.1.0          # Groq LLM provider (key rotation)
+langchain-google-genai>=1.0.0   # Google Gemini LLM provider
+langchain-openai>=0.1.0         # OpenRouter (OpenAI-compatible API)
+
+# ── Local LLM (Ollama) ───────────────────────────────────
+# Supports: qwen2.5:3b, qwen2.5:7b, deepseek-r1:1.5b, tinyllama
+# Pull with: ollama pull qwen2.5:3b   (3B — fast, main reasoning)
+#            ollama pull qwen2.5:7b   (7B — higher quality, slower)
+#            ollama pull glm4v        (vision/OCR — for GLM-OCR)
+langchain-ollama>=0.1.0
+
+# ── Vision / OCR (GLM-OCR) ───────────────────────────────
+# GLM-OCR: https://github.com/zai-org/GLM-OCR
+# Used ONLY as a vision/OCR extraction tool, NOT as reasoning LLM.
+# Served via Ollama (glm4v tag) or a local HTTP API server.
+Pillow>=10.3.0                 # Image loading, resizing, base64 encoding
+requests>=2.31.0               # Sync HTTP calls to GLM-OCR local endpoint
+
+# ── Vector Store & Embeddings ────────────────────────────
+faiss-cpu>=1.7.4               # FAISS vector store (CPU version)
+sentence-transformers>=2.7.0   # Local embeddings (all-MiniLM-L6-v2)
+numpy>=1.26.0
+
+# ── Database (configurable via DB_URL) ───────────────────
+# SQLite is built-in — zero extra packages needed for default.
+# PostgreSQL: pip install psycopg2-binary
+# MySQL:      pip install pymysql
+sqlalchemy>=2.0.0              # db_query / db_execute tools
+
+# ── API Server ───────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+aiofiles>=23.2.1               # Async file I/O
+
+# ── HTTP Client ──────────────────────────────────────────
+httpx>=0.27.0                  # Async HTTP (tests + GLM fallback)
+
+# ── Utilities ────────────────────────────────────────────
+python-dotenv>=1.0.0
+tenacity>=8.3.0                # Retry logic for LLM calls
+rich>=13.7.0                   # Terminal output
+structlog>=24.1.0              # Structured logging
+
+# ── Data & Serialization ─────────────────────────────────
+jsonlines>=4.0.0               # JSONL episodic memory
+pyyaml>=6.0.1                  # YAML front-matter parsing
+
+# ── Model Battle / Reporting ─────────────────────────────
+tabulate>=0.9.0                # ASCII comparison tables
+
+# ── Testing ───────────────────────────────────────────────
+pytest>=8.2.0
+pytest-asyncio>=0.23.0
