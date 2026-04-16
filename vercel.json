@@ -16,22 +16,10 @@
             "use": "@vercel/node",
             "config": {
                 "includeFiles": [
-                    "backend/database/**/*.db",
-                    "backend/data/**/*.sqlite",
-                    "backend/*.db",
-                    "backend/*.sqlite"
-                ],
-                "excludeFiles": [
-                    "node_modules/better-sqlite3/build/**/*.node"
+                    "backend/data/**/*.db",
+                    "backend/*.db"
                 ]
             }
         }
-    ],
-    "functions": {
-        "backend/**/*.js": {
-            "runtime": "nodejs20.x",
-            "memory": 1024,
-            "maxDuration": 10
-        }
-    }
+    ]
 }
